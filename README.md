@@ -1,28 +1,38 @@
 # Rspec::ProgressTable
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rspec/progress_table`. To experiment with that code, run `bin/console` for an interactive prompt.
+![Example](doc/exmple.png)
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'rspec-progress_table'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install rspec-progress_table
+RSpec::ProgressTable is an RSpec formatter that displays test progress in a table format during RSpec runs.
 
 ## Usage
 
-TODO: Write usage instructions here
+    bundle add rspec-progress_table
+    bin/rspec --require rspec/progress_table --format RSpec::ProgressTable::Formatter spec
+
+
+Since it's a hassle to specify the options every time, you can add the following to your `.rspec` file and simply run `bin/rspec spec`:
+
+    --require rspec/progress_table --format RSpec::ProgressTable::Formatter
+
+## Using with test-queue
+
+When using it together with [tmm1/test-queue](https://github.com/tmm1/test-queue), configure it like this:
+
+```ruby
+# ...
+
+# Start the progress output server
+# Suppress default output
+require "rspec/progress_table/test_queue"
+RSpec::ProgressTable::TestQueue.use
+
+class FooRunner < TestQueue::Runner::RSpec
+  # Send total number of spec files and current progress to the progress output server
+  include ::RSpec::ProgressTable::TestQueue::Runner
+end
+
+FooRunner.new.execute
+```
 
 ## Development
 
