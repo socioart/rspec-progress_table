@@ -1,6 +1,6 @@
 # Rspec::ProgressTable
 
-![Example](exmple.png)
+![Example](eaxmple.png)
 
 RSpec::ProgressTable is an RSpec formatter that displays test progress in a table format during RSpec runs.
 
